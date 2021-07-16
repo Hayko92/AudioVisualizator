@@ -1,9 +1,13 @@
+package model;
+
+import model.Group;
+
 public class Item {
-    private int id;
+    private final int id;
     private String title;
     private int price;
     private String currency;
-    private Group parrent;
+    private Group parent;
 
     public Item(int id,String title, int price, String currency) {
         this.id = id;
@@ -37,16 +41,16 @@ public class Item {
     }
 
     public Group getParrent() {
-        return parrent;
+        return parent;
     }
 
     public void setParrent(Group parrent) {
-        this.parrent = parrent;
+        this.parent = parrent;
     }
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "model.Item{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", price=" + price +

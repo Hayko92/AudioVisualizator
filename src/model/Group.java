@@ -1,3 +1,5 @@
+package model;
+
 import java.util.*;
 
 public class Group {
@@ -56,18 +58,15 @@ public class Group {
 
     @Override
     public String toString() {
-        return "Group{" +
+        return "model.Group{" +
                 "id=" + id +
                 ", title='" + title + "}";
     }
     public void printContent() {
         System.out.println("Items in group "+ getTitle()+": "+items);
         System.out.println("Subgroups in group "+getTitle()+": "+ groups);
-        if(groups.size()>0) {
-            for(Group group: groups) {
-                group.printContent();
-            }
-        }
+        System.out.println("parent of group "+getTitle()+": "+ parent);
+
 
     }
 }
