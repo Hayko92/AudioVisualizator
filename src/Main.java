@@ -1,5 +1,5 @@
-import model.Group;
-import model.Item;
+import db.Storage;
+import util.UserInputUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +11,4 @@ public class Main {
         UserInputUtil.createGroup(bf);
         Storage.printContent();
     }
-
-
 }

@@ -1,14 +1,17 @@
+package util;
+
+import db.Storage;
 import model.Group;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class UserInputUtil {
+public final class UserInputUtil {
     public static void createGroup(BufferedReader bf) throws IOException {
         while (true) {
             System.out.println("Please Enter name of group");
             String title = bf.readLine();
-            if(title.equals("exit")) break;
+            if (title.equals("exit")) break;
             UserInputUtil.createSubgroup(title, bf);
 
         }
@@ -25,10 +28,10 @@ public class UserInputUtil {
             String command = bf.readLine();
             if (command.equals("exit")) break;
             if (command.equals("enter")) {
-                Storage.addGroup(title);
+                Storage.addGroup(Group.buildNewGroup(title));
                 break;
             } else if (command.equals("continue")) {
-                Storage.addGroup(title);
+                Storage.addGroup(Group.buildNewGroup(title));
                 createItem(bf);
                 break;
             } else {
@@ -37,7 +40,7 @@ public class UserInputUtil {
                     Group parentGroup = Storage.getGroupById(parentID);
                     if (parentGroup == null) System.out.println("Wrong Id");
                     else {
-                        Storage.addGroup(title);
+                        Storage.addGroup(Group.buildNewGroup(title));
                         Storage.getLastGroup().setParent(parentGroup);
 
                     }
@@ -79,4 +82,6 @@ public class UserInputUtil {
 
     }
 
+    private UserInputUtil() {
+    }
 }

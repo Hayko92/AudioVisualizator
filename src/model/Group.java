@@ -1,5 +1,7 @@
 package model;
 
+import db.Storage;
+
 import java.util.*;
 
 public class Group {
@@ -9,7 +11,7 @@ public class Group {
     private List<Item> items;
     private List<Group> groups;
 
-    public Group(int id, String title ) {
+    public Group(int id, String title) {
         this.id = id;
         this.title = title;
         this.items = new ArrayList<>();
@@ -44,7 +46,7 @@ public class Group {
         return groups;
     }
 
-    public void addGroups( Group group) {
+    public void addGroups(Group group) {
         this.groups.add(group);
     }
 
@@ -62,9 +64,13 @@ public class Group {
                 "id=" + id +
                 ", title='" + title + "}";
     }
+    public static Group buildNewGroup(String title) {
+        return new Group(Storage.getGroupList().size(), title);
+    }
+
     public void printContent() {
-        System.out.println("Items in group "+ getTitle()+": "+items);
-        System.out.println("parent of group "+getTitle()+": "+ parent);
+        System.out.println("Items in group " + getTitle() + ": " + items);
+        System.out.println("parent of group " + getTitle() + ": " + parent);
 
 
     }

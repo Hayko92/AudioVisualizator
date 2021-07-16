@@ -1,6 +1,6 @@
 package model;
 
-import model.Group;
+
 
 public class Item {
     private final int id;
@@ -9,7 +9,7 @@ public class Item {
     private String currency;
     private Group parent;
 
-    public Item(int id,String title, int price, String currency) {
+    public Item(int id, String title, int price, String currency) {
         this.id = id;
         this.title = title;
         this.price = price;
