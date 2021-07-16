@@ -8,13 +8,9 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        while (true) {
-            System.out.println("Please Enter name of group");
-            String title = bf.readLine();
-            if(title.equals("exit")) break;
-             UserInputUtil.createGroup(title,bf);
-
-       }
+        UserInputUtil.createGroup(bf);
         Storage.printContent();
     }
+
+
 }

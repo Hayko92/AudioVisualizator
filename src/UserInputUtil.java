@@ -1,12 +1,20 @@
 import model.Group;
-import model.Item;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class UserInputUtil {
-    public static void createGroup(String title, BufferedReader bf) throws IOException {
+    public static void createGroup(BufferedReader bf) throws IOException {
+        while (true) {
+            System.out.println("Please Enter name of group");
+            String title = bf.readLine();
+            if(title.equals("exit")) break;
+            UserInputUtil.createSubgroup(title, bf);
+
+        }
+    }
+
+    public static void createSubgroup(String title, BufferedReader bf) throws IOException {
 
         while (true) {
             System.out.println("Please Enter" +
