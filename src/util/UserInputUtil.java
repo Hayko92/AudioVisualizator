@@ -40,8 +40,9 @@ public final class UserInputUtil {
                     Group parentGroup = Storage.getGroupById(parentID);
                     if (parentGroup == null) System.out.println("Wrong Id");
                     else {
-                        Storage.addGroup(Group.buildNewGroup(title));
-                        Storage.getLastGroup().setParent(parentGroup);
+                        Group group = Group.buildNewGroup(title);
+                        Storage.addGroup(group);
+                        group.setParent(parentGroup);
 
                     }
                 } catch (Exception e) {
