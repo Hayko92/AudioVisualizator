@@ -10,5 +10,6 @@ public class Main {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         UserInputUtil.createGroup(bf);
         Storage.printContent();
+        UserInputUtil.createBasket(bf);
     }
 }

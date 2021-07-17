@@ -40,14 +40,17 @@ public class Group {
 
     public void addItem(Item item) {
         this.items.add(item);
+        item.setParrent(this);
     }
 
     public List<Group> getGroups() {
         return groups;
     }
 
-    public void addGroups(Group group) {
+    public void addGroup(Group group) {
         this.groups.add(group);
+        group.setParent(this);
+
     }
 
     public Group getParent() {
@@ -64,14 +67,15 @@ public class Group {
                 "id=" + id +
                 ", title='" + title + "}";
     }
+
     public static Group buildNewGroup(String title) {
         return new Group(Storage.getGroupList().size(), title);
     }
 
     public void printContent() {
-        System.out.println("Items in group " + getTitle() + ": " + items);
         System.out.println("parent of group " + getTitle() + ": " + parent);
-
+        System.out.println("Items in group " + getTitle() + ": " + items);
+        System.out.println("subgroups of group " + getTitle() + ": " + groups);
 
     }
 }

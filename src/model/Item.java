@@ -9,10 +9,11 @@ public class Item {
     private String currency;
     private Group parent;
 
-    public Item(int id, String title, int price, String currency) {
+
+    public Item(int id, String title,Resolution resolution,  String currency) {
         this.id = id;
         this.title = title;
-        this.price = price;
+        this.price = calculatePrice(resolution);
         this.currency = currency;
     }
 
@@ -48,6 +49,9 @@ public class Item {
         this.parent = parrent;
     }
 
+    public  int calculatePrice(Resolution resolution) {
+        return 0;
+    }
     @Override
     public String toString() {
         return "model.Item{" +
