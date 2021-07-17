@@ -73,7 +73,7 @@ public final class UserInputUtil {
                 System.out.println("please enter type of Resolution\n" +
                         "1. HD" +
                         "\n2. FHD"
-                        +"\n3.FourK  ");
+                        + "\n3.FourK  ");
                 String resolution = bf.readLine();
                 Resolution resolution1 = Resolution.valueOf(resolution);
 
@@ -83,7 +83,7 @@ public final class UserInputUtil {
                 int groupId = Integer.parseInt(bf.readLine());
                 Group parent = Storage.getGroupById(groupId);
                 if (parent != null) {
-                    Storage.addItem(type,title, resolution1, currency);
+                    Storage.addItem(type, title, resolution1, currency);
                     parent.addItem(Storage.getLastItem());
                 }
 
@@ -96,30 +96,32 @@ public final class UserInputUtil {
         }
 
     }
+
     public static void createBasket(BufferedReader bf) throws IOException {
         System.out.println("Please enter ID of items you want to add in basket or type exit");
-        System.out.println("available items: "+Storage.getItemList());
+        System.out.println("available items: " + Storage.getItemList());
         String command = bf.readLine();
         while (!command.equals("exit")) {
-            try{
+            try {
                 int id = Integer.parseInt(command);
                 Item item = Storage.getItemById(id);
                 Storage.getBASKET().add(item);
                 System.out.println("Item is added succesfully... type next ID or type exit");
-                command= bf.readLine();
+                command = bf.readLine();
             } catch (Exception e) {
                 System.out.println("Something went wrong...we are sorry");
             }
         }
         printPrice();
     }
+
     public static void printPrice() {
-        System.out.println("Items in your basket: "+Storage.getBASKET());
+        System.out.println("Items in your basket: " + Storage.getBASKET());
         int summ = 0;
-        for(Item item: Storage.getBASKET()) {
-            summ+=item.getPrice();
+        for (Item item : Storage.getBASKET()) {
+            summ += item.getPrice();
         }
-        System.out.println("Summ of your Basket:"+ summ);
+        System.out.println("Summ of your Basket:" + summ);
     }
 
     private UserInputUtil() {

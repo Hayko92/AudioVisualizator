@@ -1,7 +1,6 @@
 package model;
 
 
-
 public class Item {
     private final int id;
     private String title;
@@ -10,7 +9,7 @@ public class Item {
     private Group parent;
 
 
-    public Item(int id, String title,Resolution resolution,  String currency) {
+    public Item(int id, String title, Resolution resolution, String currency) {
         this.id = id;
         this.title = title;
         this.price = calculatePrice(resolution);
@@ -49,9 +48,10 @@ public class Item {
         this.parent = parrent;
     }
 
-    public  int calculatePrice(Resolution resolution) {
+    public int calculatePrice(Resolution resolution) {
         return 0;
     }
+
     @Override
     public String toString() {
         return "model.Item{" +

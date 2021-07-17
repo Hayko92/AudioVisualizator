@@ -15,9 +15,9 @@ public class Storage {
     }
 
     public static void addItem(String type, String title, Resolution resolution, String currency) throws Exception {
-        if(type.equals("Stock"))
-        ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, resolution, currency));
-        else if(type.equals("Generative"))
+        if (type.equals("Stock"))
+            ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, resolution, currency));
+        else if (type.equals("Generative"))
             ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, resolution, currency));
         else throw new Exception("Wrong type");
     }
@@ -26,6 +26,7 @@ public class Storage {
         if (id >= 0 && id < GROUP_LIST.size()) return GROUP_LIST.get(id);
         else return null;
     }
+
     public static Item getItemById(int id) {
         if (id >= 0 && id < ITEM_LIST.size()) return ITEM_LIST.get(id);
         else return null;

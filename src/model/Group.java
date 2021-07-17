@@ -76,6 +76,5 @@ public class Group {
         System.out.println("parent of group " + getTitle() + ": " + parent);
         System.out.println("Items in group " + getTitle() + ": " + items);
         System.out.println("subgroups of group " + getTitle() + ": " + groups);
-
     }
 }
