@@ -8,17 +8,17 @@ import java.util.List;
 public class Storage {
     private static final List<Group> GROUP_LIST = new ArrayList<>();
     private static final List<Item> ITEM_LIST = new ArrayList<>();
-    private static final List<Item> BASKET_LIST = new ArrayList<>();
 
     public static void addGroup(Group group) {
         GROUP_LIST.add(group);
     }
 
-    public static void addItem(String type, String title, Resolution resolution, String currency) throws Exception {
-        if (type.equals("Stock"))
-            ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, resolution, currency));
-        else if (type.equals("Generative"))
-            ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, resolution, currency));
+    public static void addItem(String type, String title, int price, Configuration configuration, String currency) throws Exception {
+        if (type.equalsIgnoreCase("Stock")) {
+
+            ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, price, configuration, currency));
+        } else if (type.equalsIgnoreCase("Generative"))
+            ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, price, configuration, currency));
         else throw new Exception("Wrong type");
     }
 
@@ -51,8 +51,5 @@ public class Storage {
         return ITEM_LIST;
     }
 
-    public static List<Item> getBASKET() {
-        return BASKET_LIST;
-    }
 }
 

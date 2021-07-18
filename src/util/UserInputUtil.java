@@ -1,9 +1,7 @@
 package util;
 
 import db.Storage;
-import model.Group;
-import model.Item;
-import model.Resolution;
+import model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +11,7 @@ public final class UserInputUtil {
         while (true) {
             System.out.println("Please Enter name of group");
             String title = bf.readLine();
-            if (title.equals("exit")) break;
+            if (title.equalsIgnoreCase("exit")) break;
             UserInputUtil.createSubgroup(title, bf);
 
         }
@@ -28,11 +26,11 @@ public final class UserInputUtil {
                     "\n 3. Continue to fill items in group");
 
             String command = bf.readLine();
-            if (command.equals("exit")) break;
-            if (command.equals("enter")) {
+            if (command.equalsIgnoreCase("exit")) break;
+            if (command.equalsIgnoreCase("enter")) {
                 Storage.addGroup(Group.buildNewGroup(title));
                 break;
-            } else if (command.equals("continue")) {
+            } else if (command.equalsIgnoreCase("continue")) {
                 Storage.addGroup(Group.buildNewGroup(title));
                 createItem(bf);
                 break;
@@ -63,13 +61,19 @@ public final class UserInputUtil {
             try {
                 System.out.println("Please type title of item");
                 String title = bf.readLine();
-                if (title.equals("exit")) break;
-//                System.out.println("Please type price of item");
-//                int price = Integer.parseInt(bf.readLine());
+                if (title.equalsIgnoreCase("exit")) break;
+                System.out.println("Please type price of item");
+                int price = Integer.parseInt(bf.readLine());
                 System.out.println("please enter type of item\n" +
                         "1. Stock" +
                         "\n2. Generative");
                 String type = bf.readLine();
+                double complexity = 0;
+                if (type.equalsIgnoreCase("Generative")) {
+                    System.out.println("Please enter complexity from 1 to 2;");
+                    String compl = bf.readLine();
+                    complexity = Double.parseDouble(compl);
+                }
                 System.out.println("please enter type of Resolution\n" +
                         "1. HD" +
                         "\n2. FHD"
@@ -83,8 +87,15 @@ public final class UserInputUtil {
                 int groupId = Integer.parseInt(bf.readLine());
                 Group parent = Storage.getGroupById(groupId);
                 if (parent != null) {
-                    Storage.addItem(type, title, resolution1, currency);
+                    if (complexity == 0) {
+
+                        Storage.addItem(type, title, price, new Configuration(resolution1), currency);
+                    } else {
+                        Storage.addItem(type, title, price, new Configuration(resolution1, complexity), currency);
+
+                    }
                     parent.addItem(Storage.getLastItem());
+
                 }
 
             } catch (Exception e) {
@@ -101,28 +112,21 @@ public final class UserInputUtil {
         System.out.println("Please enter ID of items you want to add in basket or type exit");
         System.out.println("available items: " + Storage.getItemList());
         String command = bf.readLine();
-        while (!command.equals("exit")) {
+        Basket basket = new Basket();
+        while (!command.equalsIgnoreCase("exit")) {
             try {
                 int id = Integer.parseInt(command);
                 Item item = Storage.getItemById(id);
-                Storage.getBASKET().add(item);
+                basket.getItems().add(item);
                 System.out.println("Item is added succesfully... type next ID or type exit");
                 command = bf.readLine();
             } catch (Exception e) {
                 System.out.println("Something went wrong...we are sorry");
             }
         }
-        printPrice();
+        basket.printPrice();
     }
 
-    public static void printPrice() {
-        System.out.println("Items in your basket: " + Storage.getBASKET());
-        int summ = 0;
-        for (Item item : Storage.getBASKET()) {
-            summ += item.getPrice();
-        }
-        System.out.println("Summ of your Basket:" + summ);
-    }
 
     private UserInputUtil() {
     }

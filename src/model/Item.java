@@ -7,13 +7,20 @@ public class Item {
     private int price;
     private String currency;
     private Group parent;
+    private Configuration configuration;
+    private double finalPrice;
 
 
-    public Item(int id, String title, Resolution resolution, String currency) {
+    public Item(int id, String title, int price, Configuration configuration, String currency) {
         this.id = id;
         this.title = title;
-        this.price = calculatePrice(resolution);
+        this.price = price;
+        this.finalPrice = calculatePrice(configuration);
         this.currency = currency;
+    }
+
+    public double getFinalPrice() {
+        return finalPrice;
     }
 
     public String getTitle() {
@@ -48,8 +55,20 @@ public class Item {
         this.parent = parrent;
     }
 
-    public int calculatePrice(Resolution resolution) {
+    public double calculatePrice(Configuration configuration) {
         return 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Group getParent() {
+        return parent;
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
     }
 
     @Override

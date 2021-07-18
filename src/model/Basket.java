@@ -1,0 +1,23 @@
+package model;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Basket {
+    private final List<Item> items = new ArrayList<>();
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void printPrice() {
+        System.out.println("Items in your basket: " + this.getItems());
+        int summ = 0;
+        for (Item item : this.getItems()) {
+            summ += item.getFinalPrice();
+        }
+        System.out.println("Summ of your Basket:" + summ);
+    }
+
+}
