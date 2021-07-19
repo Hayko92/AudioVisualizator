@@ -5,11 +5,11 @@ import db.Storage;
 import java.util.*;
 
 public class Group {
-    private int id;
-    private String title;
+    private final int id;
+    private final String title;
     private Group parent;
-    private List<Item> items;
-    private List<Group> groups;
+    private final List<Item> items;
+    private final List<Group> groups;
 
     public Group(int id, String title) {
         this.id = id;
@@ -18,43 +18,19 @@ public class Group {
         this.groups = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
     public void addItem(Item item) {
         this.items.add(item);
-        item.setParrent(this);
-    }
-
-    public List<Group> getGroups() {
-        return groups;
+        item.setParent(this);
     }
 
     public void addGroup(Group group) {
         this.groups.add(group);
         group.setParent(this);
 
-    }
-
-    public Group getParent() {
-        return parent;
     }
 
     public void setParent(Group parent) {

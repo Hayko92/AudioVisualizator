@@ -5,7 +5,7 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage {
+public final class Storage {
     private static final List<Group> GROUP_LIST = new ArrayList<>();
     private static final List<Item> ITEM_LIST = new ArrayList<>();
 
@@ -13,12 +13,11 @@ public class Storage {
         GROUP_LIST.add(group);
     }
 
-    public static void addItem(String type, String title, int price, Configuration configuration, String currency) throws Exception {
+    public static void addItem(String type, String title, int price, Configuration configuration, double complexity, String currency) throws Exception {
         if (type.equalsIgnoreCase("Stock")) {
-
             ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, price, configuration, currency));
         } else if (type.equalsIgnoreCase("Generative"))
-            ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, price, configuration, currency));
+            ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, price, configuration, complexity, currency));
         else throw new Exception("Wrong type");
     }
 
@@ -51,5 +50,7 @@ public class Storage {
         return ITEM_LIST;
     }
 
+    private Storage() {
+    }
 }
 

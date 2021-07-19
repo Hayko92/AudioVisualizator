@@ -18,13 +18,11 @@ public final class UserInputUtil {
     }
 
     public static void createSubgroup(String title, BufferedReader bf) throws IOException {
-
         while (true) {
             System.out.println("Please Enter" +
                     "\n 1. ID of parent" +
                     "\n 2. Enter to create group as root level group" +
                     "\n 3. Continue to fill items in group");
-
             String command = bf.readLine();
             if (command.equalsIgnoreCase("exit")) break;
             if (command.equalsIgnoreCase("enter")) {
@@ -43,8 +41,6 @@ public final class UserInputUtil {
                         Group group = Group.buildNewGroup(title);
                         Storage.addGroup(group);
                         parentGroup.addGroup(group);
-
-
                     }
                 } catch (Exception e) {
                     System.out.println("Something went wrong...");
@@ -52,11 +48,9 @@ public final class UserInputUtil {
                 }
             }
         }
-
-
     }
 
-    public static void createItem(BufferedReader bf) throws IOException {
+    public static void createItem(BufferedReader bf) {
         while (true) {
             try {
                 System.out.println("Please type title of item");
@@ -87,25 +81,14 @@ public final class UserInputUtil {
                 int groupId = Integer.parseInt(bf.readLine());
                 Group parent = Storage.getGroupById(groupId);
                 if (parent != null) {
-                    if (complexity == 0) {
-
-                        Storage.addItem(type, title, price, new Configuration(resolution1), currency);
-                    } else {
-                        Storage.addItem(type, title, price, new Configuration(resolution1, complexity), currency);
-
-                    }
+                    Storage.addItem(type, title, price, new Configuration(resolution1), complexity, currency);
                     parent.addItem(Storage.getLastItem());
-
                 }
-
             } catch (Exception e) {
                 System.out.println("Something went wrong.. we are sorry");
                 break;
             }
-
-
         }
-
     }
 
     public static void createBasket(BufferedReader bf) throws IOException {
@@ -126,7 +109,6 @@ public final class UserInputUtil {
         }
         basket.printPrice();
     }
-
 
     private UserInputUtil() {
     }

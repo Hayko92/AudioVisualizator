@@ -15,9 +15,8 @@ public class Basket {
         System.out.println("Items in your basket: " + this.getItems());
         int summ = 0;
         for (Item item : this.getItems()) {
-            summ += item.getFinalPrice();
+            summ += item.calculatePrice(item.getConfiguration());
         }
         System.out.println("Summ of your Basket:" + summ);
     }
-
 }
