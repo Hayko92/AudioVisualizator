@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,6 @@ public class Basket {
         for (Item item : this.getItems()) {
             summ += item.calculatePrice(item.getConfiguration());
         }
-        System.out.println("Summ of your Basket:" + summ);
+        System.out.println("Sum of your Basket:" + summ);
     }
 }

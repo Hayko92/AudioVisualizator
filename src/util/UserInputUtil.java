@@ -101,7 +101,7 @@ public final class UserInputUtil {
                 int id = Integer.parseInt(command);
                 Item item = Storage.getItemById(id);
                 basket.getItems().add(item);
-                System.out.println("Item is added succesfully... type next ID or type exit");
+                System.out.println("Item is added successfully... type next ID or type exit");
                 command = bf.readLine();
             } catch (Exception e) {
                 System.out.println("Something went wrong...we are sorry");
