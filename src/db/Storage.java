@@ -24,6 +24,9 @@ public final class Storage {
         ITEM_LIST.add(new Item(5, "Fourth", 15, new Configuration(Resolution.FHD), "USD"));
     }
 
+    private Storage() {
+    }
+
     public static void addGroup(Group group) {
         GROUP_LIST.add(group);
     }
@@ -37,17 +40,17 @@ public final class Storage {
     }
 
     public static Group getGroupById(int id) {
-        if (id >= 0 && id < GROUP_LIST.size()) return GROUP_LIST.get(id);
+        if (id >= 0 && id < GROUP_LIST.size()) return getGroupById(id);
         else return null;
     }
 
     public static Item getItemById(int id) {
-        if (id >= 0 && id < ITEM_LIST.size()) return ITEM_LIST.get(id);
+        if (id >= 0 && id < ITEM_LIST.size()) return getItemById(id);
         else return null;
     }
 
     public static Item getLastItem() {
-        if (GROUP_LIST.size() > 0) return ITEM_LIST.get(ITEM_LIST.size() - 1);
+        if (GROUP_LIST.size() > 0) return getItemById(ITEM_LIST.size() - 1);
         else return null;
     }
 
@@ -60,41 +63,70 @@ public final class Storage {
         return ITEM_LIST;
     }
 
-    public static Item findItemById(int id) {
-        return getItemList().stream().filter(el -> el.getId() == id).findAny().get();
+    public static Optional<Item> findItemById(int id) {
+        return getItemList()
+                .stream()
+                .filter(el -> el.getId() == id)
+                .findAny();
     }
 
-    public static Item findItemByName(String name) {
-        return getItemList().stream().filter(el -> el.getTitle().equals(name)).findAny().get();
+    public static Optional<Item> findItemByName(String name) {
+        return getItemList()
+                .stream()
+                .filter(el -> el.getTitle().equals(name))
+                .findAny();
     }
 
-    public static Group findGroupById(int id) {
-        return getGroupList().stream().filter(el -> el.getId() == id).findAny().get();
+    public static Optional<Group> findGroupById(int id) {
+        return getGroupList()
+                .stream()
+                .filter(el -> el.getId() == id)
+                .findAny();
+
+
     }
 
     public static Group findGroupByName(String name) {
-        return getGroupList().stream().filter(el -> el.getTitle().equals(name)).findAny().orElse(null);
+        return getGroupList()
+                .stream()
+                .filter(el -> el.getTitle().equals(name))
+                .findAny().orElse(null);
 
     }
 
     public static List<Group> findSubGroupsByParent(Group parent) {
-        return getGroupList().stream().filter(el -> el.getParent().equals(parent)).collect(Collectors.toList());
+        return getGroupList()
+                .stream()
+                .filter(el -> el.getParent().equals(parent))
+                .collect(Collectors.toList());
     }
 
     public static List<Item> findHighestPricedItems() {
-        int highestPrice = getItemList().stream().max(Comparator.comparingInt(Item::getPrice)).get().getPrice();
-        return getItemList().stream().filter(el -> el.getPrice() == highestPrice).collect(Collectors.toList());
+        int highestPrice = getItemList()
+                .stream()
+                .max(Comparator.comparingInt(Item::getPrice))
+                .get().getPrice();
+
+        return getItemList()
+                .stream()
+                .filter(el -> el.getPrice() == highestPrice)
+                .collect(Collectors.toList());
     }
 
     public static List<Item> findAllItemsByPrice(int price) {
-        return getItemList().stream().filter(el -> el.getPrice() == price).collect(Collectors.toList());
+        return getItemList()
+                .stream().filter(el -> el.getPrice() == price)
+                .collect(Collectors.toList());
     }
 
     public static List<Group> findSubGroupsByParentId(int parentId) {
-        return getGroupList().stream().filter(el -> el.getId() == parentId).map(Group::getGroups).findAny().orElse(null);
+        return getGroupList()
+                .stream()
+                .filter(el -> el.getId() == parentId)
+                .map(Group::getGroups)
+                .findAny()
+                .orElse(null);
     }
 
-    private Storage() {
-    }
 }
 
