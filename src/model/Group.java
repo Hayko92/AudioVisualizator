@@ -27,6 +27,10 @@ public class Group {
         item.setParent(this);
     }
 
+    public List<Group> getGroups() {
+        return groups;
+    }
+
     public void addGroup(Group group) {
         this.groups.add(group);
         group.setParent(this);

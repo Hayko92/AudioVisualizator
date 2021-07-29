@@ -2,15 +2,27 @@ package db;
 
 import model.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.Predicate;
+import java.util.*;
 import java.util.stream.Collectors;
+
 
 public final class Storage {
     private static final List<Group> GROUP_LIST = new ArrayList<>();
     private static final List<Item> ITEM_LIST = new ArrayList<>();
+
+    static {
+        GROUP_LIST.add(new Group(0, "First"));
+        GROUP_LIST.add(new Group(1, "Sec"));
+        GROUP_LIST.add(new Group(2, "Third"));
+        GROUP_LIST.add(new Group(3, "Fourth"));
+
+        ITEM_LIST.add(new Item(0, "First", 10, new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item(1, "Sec", 11, new Configuration(Resolution.HD), "USD"));
+        ITEM_LIST.add(new Item(2, "Third", 19, new Configuration(Resolution.FourK), "USD"));
+        ITEM_LIST.add(new Item(3, "Fourth", 15, new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item(4, "Fourth", 15, new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item(5, "Fourth", 15, new Configuration(Resolution.FHD), "USD"));
+    }
 
     public static void addGroup(Group group) {
         GROUP_LIST.add(group);
@@ -61,7 +73,8 @@ public final class Storage {
     }
 
     public static Group findGroupByName(String name) {
-        return getGroupList().stream().filter(el -> el.getTitle().equals(name)).findAny().get();
+        return getGroupList().stream().filter(el -> el.getTitle().equals(name)).findAny().orElse(null);
+
     }
 
     public static List<Group> findSubGroupsByParent(Group parent) {
@@ -75,6 +88,10 @@ public final class Storage {
 
     public static List<Item> findAllItemsByPrice(int price) {
         return getItemList().stream().filter(el -> el.getPrice() == price).collect(Collectors.toList());
+    }
+
+    public static List<Group> findSubGroupsByParentId(int parentId) {
+        return getGroupList().stream().filter(el -> el.getId() == parentId).map(Group::getGroups).findAny().orElse(null);
     }
 
     private Storage() {

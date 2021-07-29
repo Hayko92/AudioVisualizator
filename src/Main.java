@@ -15,5 +15,11 @@ public class Main {
         }
         UserInputUtil.createBasket(bf);
         Storage.findItemById(0).print();
+        System.out.println(Storage.findAllItemsByPrice(15));
+        System.out.println(Storage.findGroupById(0));
+        System.out.println(Storage.findGroupByName("First"));
+        System.out.println(Storage.findGroupByName("sdsds"));
+        System.out.println(Storage.findHighestPricedItems());
+        System.out.println(Storage.findSubGroupsByParentId(0));
     }
 }
