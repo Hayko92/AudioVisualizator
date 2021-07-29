@@ -1,4 +1,5 @@
 import db.Storage;
+import model.Group;
 import util.UserInputUtil;
 
 import java.io.BufferedReader;
@@ -9,7 +10,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         UserInputUtil.createGroup(bf);
-        Storage.printContent();
+        for(Group group: Storage.getGroupList()) {
+            group.print(0);
+        }
         UserInputUtil.createBasket(bf);
+        Storage.findItemById(0).print();
     }
 }

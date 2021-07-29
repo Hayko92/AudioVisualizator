@@ -18,6 +18,14 @@ public class Item {
         this.configuration = configuration;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     public int getPrice() {
         return price;
     }
@@ -54,5 +62,9 @@ public class Item {
                 ", price=" + price +
                 ", currency='" + currency + '\'' +
                 '}';
+    }
+    public void print() {
+        System.out.printf("ITEM(%s) - id: {%d} {%s} {%d}%n",
+                this.getClass().getSimpleName(), id, title, price);
     }
 }

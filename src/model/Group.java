@@ -33,8 +33,16 @@ public class Group {
 
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setParent(Group parent) {
         this.parent = parent;
+    }
+
+    public Group getParent() {
+        return parent;
     }
 
     @Override
@@ -48,9 +56,25 @@ public class Group {
         return new Group(Storage.getGroupList().size(), title);
     }
 
-    public void printContent() {
-        System.out.println("parent of group " + getTitle() + ": " + parent);
-        System.out.println("Items in group " + getTitle() + ": " + items);
-        System.out.println("subgroups of group " + getTitle() + ": " + groups);
+    public void print(int level) {
+        System.out.printf("GROUP - id: {%d} {%s}%n", id, title);
+        printSubGroups(++level);
+        printItems(level);
+    }
+
+    private void printSubGroups(int level) {
+        String subLevelPrefix = "  ".repeat(level);
+        for (Group group : groups) {
+            System.out.print(subLevelPrefix);
+            group.print(level);
+        }
+    }
+
+    private void printItems(int level) {
+        String subLevelPrefix = "  ".repeat(level);
+        for (Item item : items) {
+            System.out.print(subLevelPrefix);
+            item.print();
+        }
     }
 }

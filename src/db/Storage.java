@@ -3,7 +3,10 @@ package db;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public final class Storage {
     private static final List<Group> GROUP_LIST = new ArrayList<>();
@@ -36,11 +39,6 @@ public final class Storage {
         else return null;
     }
 
-    public static void printContent() {
-        for (Group group : GROUP_LIST) {
-            group.printContent();
-        }
-    }
 
     public static List<Group> getGroupList() {
         return GROUP_LIST;
@@ -48,6 +46,35 @@ public final class Storage {
 
     public static List<Item> getItemList() {
         return ITEM_LIST;
+    }
+
+    public static Item findItemById(int id) {
+        return getItemList().stream().filter(el -> el.getId() == id).findAny().get();
+    }
+
+    public static Item findItemByName(String name) {
+        return getItemList().stream().filter(el -> el.getTitle().equals(name)).findAny().get();
+    }
+
+    public static Group findGroupById(int id) {
+        return getGroupList().stream().filter(el -> el.getId() == id).findAny().get();
+    }
+
+    public static Group findGroupByName(String name) {
+        return getGroupList().stream().filter(el -> el.getTitle().equals(name)).findAny().get();
+    }
+
+    public static List<Group> findSubGroupsByParent(Group parent) {
+        return getGroupList().stream().filter(el -> el.getParent().equals(parent)).collect(Collectors.toList());
+    }
+
+    public static List<Item> findHighestPricedItems() {
+        int highestPrice = getItemList().stream().max(Comparator.comparingInt(Item::getPrice)).get().getPrice();
+        return getItemList().stream().filter(el -> el.getPrice() == highestPrice).collect(Collectors.toList());
+    }
+
+    public static List<Item> findAllItemsByPrice(int price) {
+        return getItemList().stream().filter(el -> el.getPrice() == price).collect(Collectors.toList());
     }
 
     private Storage() {
