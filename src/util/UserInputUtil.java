@@ -5,6 +5,7 @@ import model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Optional;
 
 public final class UserInputUtil {
     public static void createGroup(BufferedReader bf) throws IOException {
@@ -35,12 +36,12 @@ public final class UserInputUtil {
             } else {
                 try {
                     int parentID = Integer.parseInt(command);
-                    Group parentGroup = Storage.getGroupById(parentID);
-                    if (parentGroup == null) System.out.println("Wrong Id");
+                    Optional<Group> parentGroup = Storage.getGroupById(parentID);
+                    if (parentGroup.isEmpty()) System.out.println("Wrong Id");
                     else {
                         Group group = Group.buildNewGroup(title);
                         Storage.addGroup(group);
-                        parentGroup.addGroup(group);
+                        parentGroup.get().addGroup(group);
                     }
                 } catch (Exception e) {
                     System.out.println("Something went wrong...");
@@ -58,6 +59,8 @@ public final class UserInputUtil {
                 if (title.equalsIgnoreCase("exit")) break;
                 System.out.println("Please type price of item");
                 int price = Integer.parseInt(bf.readLine());
+                System.out.println("Please type image_URL of item");
+                String imageUrl = bf.readLine();
                 System.out.println("please enter type of item\n" +
                         "1. Stock" +
                         "\n2. Generative");
@@ -79,10 +82,10 @@ public final class UserInputUtil {
                 String currency = bf.readLine();
                 System.out.println("Please type id of group");
                 int groupId = Integer.parseInt(bf.readLine());
-                Group parent = Storage.getGroupById(groupId);
-                if (parent != null) {
-                    Storage.addItem(type, title, price, new Configuration(resolution1), complexity, currency);
-                    parent.addItem(Storage.getLastItem());
+                Optional<Group> parent = Storage.getGroupById(groupId);
+                if (parent.isPresent()) {
+                    Storage.addItem(type, title, price, imageUrl, new Configuration(resolution1), complexity, currency);
+                    parent.get().addItem(Storage.getLastItem().get());
                 }
             } catch (Exception e) {
                 System.out.println("Something went wrong.. we are sorry");
@@ -99,8 +102,8 @@ public final class UserInputUtil {
         while (!command.equalsIgnoreCase("exit")) {
             try {
                 int id = Integer.parseInt(command);
-                Item item = Storage.getItemById(id);
-                basket.getItems().add(item);
+                Optional<Item> item = Storage.getItemById(id);
+                item.ifPresent(value -> basket.getItems().add(value));
                 System.out.println("Item is added successfully... type next ID or type exit");
                 command = bf.readLine();
             } catch (Exception e) {

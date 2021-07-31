@@ -16,12 +16,12 @@ public final class Storage {
         GROUP_LIST.add(new Group(2, "Third"));
         GROUP_LIST.add(new Group(3, "Fourth"));
 
-        ITEM_LIST.add(new Item(0, "First", 10, new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item(1, "Sec", 11, new Configuration(Resolution.HD), "USD"));
-        ITEM_LIST.add(new Item(2, "Third", 19, new Configuration(Resolution.FourK), "USD"));
-        ITEM_LIST.add(new Item(3, "Fourth", 15, new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item(4, "Fourth", 15, new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item(5, "Fourth", 15, new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item(100, "First", 10, "URL1", new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item(110, "Sec", 11, "URL2", new Configuration(Resolution.HD), "USD"));
+        ITEM_LIST.add(new Item(220, "Third", 19, "URL3", new Configuration(Resolution.FourK), "USD"));
+        ITEM_LIST.add(new Item(300, "Fourth", 15, "URL4", new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item(400, "Fourth", 15, "URL5", new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item(500, "Fourth", 15, "URL6", new Configuration(Resolution.FHD), "USD"));
     }
 
     private Storage() {
@@ -31,25 +31,29 @@ public final class Storage {
         GROUP_LIST.add(group);
     }
 
-    public static void addItem(String type, String title, int price, Configuration configuration, double complexity, String currency) throws Exception {
+    public static void addItem(String type, String title, int price, String image_URL, Configuration configuration, double complexity, String currency) throws Exception {
         if (type.equalsIgnoreCase("Stock")) {
-            ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, price, configuration, currency));
+            ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, price, image_URL, configuration, currency));
         } else if (type.equalsIgnoreCase("Generative"))
-            ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, price, configuration, complexity, currency));
+            ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, price, image_URL, configuration, complexity, currency));
         else throw new Exception("Wrong type");
     }
 
-    public static Group getGroupById(int id) {
-        if (id >= 0 && id < GROUP_LIST.size()) return getGroupById(id);
-        else return null;
+    public static void addItem(Item item) {
+        ITEM_LIST.add(item);
     }
 
-    public static Item getItemById(int id) {
-        if (id >= 0 && id < ITEM_LIST.size()) return getItemById(id);
-        else return null;
+    public static Optional<Group> getGroupById(int id) {
+        if (id >= 0 && id < GROUP_LIST.size()) return findGroupById(id);
+        else return Optional.empty();
     }
 
-    public static Item getLastItem() {
+    public static Optional<Item> getItemById(int id) {
+        if (id >= 0 && id < ITEM_LIST.size()) return findItemById(id);
+        else return Optional.empty();
+    }
+
+    public static Optional<Item> getLastItem() {
         if (GROUP_LIST.size() > 0) return getItemById(ITEM_LIST.size() - 1);
         else return null;
     }
