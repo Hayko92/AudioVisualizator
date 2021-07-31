@@ -5,3 +5,4 @@ public class Stock extends Item {
         super(id, title, price, image_URL, configuration, currency);
     }
 }
+
