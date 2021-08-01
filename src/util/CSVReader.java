@@ -1,5 +1,6 @@
 package util;
 
+import customExceptions.FileNotFountCustomException;
 import db.Storage;
 import model.Item;
 
@@ -22,7 +23,7 @@ public class CSVReader {
                 lines.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new FileNotFountCustomException("wrong file path");
         }
         return lines;
     }

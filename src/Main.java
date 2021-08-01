@@ -1,3 +1,4 @@
+import customExceptions.WrongInputCustomException;
 import db.Storage;
 import model.Group;
 import model.Item;
@@ -18,7 +19,7 @@ public class Main {
             UserInputUtil.createBasket(bf);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new WrongInputCustomException("You have entered wrong input");
         }
         File file = new File("src/main/resources/item.csv");
 
