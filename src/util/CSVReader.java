@@ -14,12 +14,15 @@ public class CSVReader {
     private CSVReader() {
     }
 
-    public static List<String> getDataFromFIle(File file) throws IOException {
-        BufferedReader bf = new BufferedReader(new FileReader(file));
+    public static List<String> getDataFromFIle(File file) {
         List<String> lines = new ArrayList<>();
-        while (bf.ready()) {
-            String line = bf.readLine();
-            lines.add(line);
+        try (BufferedReader bf = new BufferedReader(new FileReader(file))) {
+            while (bf.ready()) {
+                String line = bf.readLine();
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return lines;
     }

@@ -12,12 +12,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        UserInputUtil.createGroup(bf);
-        UserInputUtil.createBasket(bf);
+    public static void main(String[] args) {
+        try (BufferedReader bf = new BufferedReader(new InputStreamReader(System.in))) {
+            UserInputUtil.createGroup(bf);
+            UserInputUtil.createBasket(bf);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         File file = new File("src/main/resources/item.csv");
+
         List<String> lines = CSVReader.getDataFromFIle(file);
 
         for (String line : lines) {
@@ -26,10 +30,13 @@ public class Main {
             int basePrice = Integer.parseInt(itemFields[1]);
             String name = itemFields[2];
             String imageURl = itemFields[3];
+
             int parentId = Integer.parseInt(itemFields[4]);
             Optional<Group> parent = Storage.getGroupById(parentId);
+
             Item item = new Item(id, name, basePrice, imageURl);
             parent.ifPresent(item::setParent);
+
             Storage.addItem(item);
         }
         for (Item item : Storage.getItemList()) {
