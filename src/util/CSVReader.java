@@ -1,8 +1,6 @@
 package util;
 
-import customExceptions.FileNotFountCustomException;
-import db.Storage;
-import model.Item;
+import exception.AppRuntimeException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,7 +21,7 @@ public class CSVReader {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new FileNotFountCustomException("wrong file path");
+            throw new AppRuntimeException("wrong file path");
         }
         return lines;
     }
