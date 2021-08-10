@@ -19,7 +19,7 @@ public class StorageTest {
         Storage.addGroup(group);
         int newSize = Storage.getGroupList().size();
         assertEquals(1, newSize - oldSize);
-        Optional<Group> received = Storage.findGroupById(100);
+        Optional<Group> received = Storage.findGroupById(1);
         assertTrue(received.isPresent());
         assertEquals(group, received.get());
     }
@@ -41,6 +41,6 @@ public class StorageTest {
         Group group = new Group("Test");
         Storage.addGroup(group);
         Optional<Group> received = Storage.findGroupById(1);
-        assertEquals(100, received.get().getId());
+        assertEquals(1, received.get().getId());
     }
 }
