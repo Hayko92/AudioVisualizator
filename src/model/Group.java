@@ -1,6 +1,7 @@
 package model;
 
 import db.Storage;
+import util.GroupIdGenerator;
 
 import java.util.*;
 
@@ -11,8 +12,8 @@ public class Group {
     private final List<Item> items;
     private final List<Group> groups;
 
-    public Group(int id, String title) {
-        this.id = id;
+    public Group( String title) {
+        this.id = GroupIdGenerator.getNextId();
         this.title = title;
         this.items = new ArrayList<>();
         this.groups = new ArrayList<>();
@@ -57,7 +58,7 @@ public class Group {
     }
 
     public static Group buildNewGroup(String title) {
-        return new Group(Storage.getGroupList().size(), title);
+        return new Group( title);
     }
 
     public void print(int level) {

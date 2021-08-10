@@ -1,6 +1,7 @@
 package db;
 
 import model.*;
+import util.GroupIdGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,17 +12,17 @@ public final class Storage {
     private static final List<Item> ITEM_LIST = new ArrayList<>();
 
     static {
-        GROUP_LIST.add(new Group(0, "First"));
-        GROUP_LIST.add(new Group(1, "Sec"));
-        GROUP_LIST.add(new Group(2, "Third"));
-        GROUP_LIST.add(new Group(3, "Fourth"));
+        GROUP_LIST.add(new Group( "First"));
+        GROUP_LIST.add(new Group( "Sec"));
+        GROUP_LIST.add(new Group( "Third"));
+        GROUP_LIST.add(new Group( "Fourth"));
 
-        ITEM_LIST.add(new Item(100, "First", 10, "URL1", new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item(110, "Sec", 11, "URL2", new Configuration(Resolution.HD), "USD"));
-        ITEM_LIST.add(new Item(220, "Third", 19, "URL3", new Configuration(Resolution.FourK), "USD"));
-        ITEM_LIST.add(new Item(300, "Fourth", 15, "URL4", new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item(400, "Fourth", 15, "URL5", new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item(500, "Fourth", 15, "URL6", new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item( "First", 10, "URL1", new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item( "Sec", 11, "URL2", new Configuration(Resolution.HD), "USD"));
+        ITEM_LIST.add(new Item( "Third", 19, "URL3", new Configuration(Resolution.FourK), "USD"));
+        ITEM_LIST.add(new Item( "Fourth", 15, "URL4", new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item( "Fourth", 15, "URL5", new Configuration(Resolution.FHD), "USD"));
+        ITEM_LIST.add(new Item( "Fourth", 15, "URL6", new Configuration(Resolution.FHD), "USD"));
     }
 
     private Storage() {
@@ -33,9 +34,9 @@ public final class Storage {
 
     public static void addItem(String type, String title, int price, String image_URL, Configuration configuration, double complexity, String currency) throws Exception {
         if (type.equalsIgnoreCase("Stock")) {
-            ITEM_LIST.add(new Stock(ITEM_LIST.size(), title, price, image_URL, configuration, currency));
+            ITEM_LIST.add(new Stock( title, price, image_URL, configuration, currency));
         } else if (type.equalsIgnoreCase("Generative"))
-            ITEM_LIST.add(new Generative(ITEM_LIST.size(), title, price, image_URL, configuration, complexity, currency));
+            ITEM_LIST.add(new Generative( title, price, image_URL, configuration, complexity, currency));
         else throw new Exception("Wrong type");
     }
 

@@ -1,6 +1,8 @@
 package model;
 
 
+import util.ItemIdGenerator;
+
 import java.util.Objects;
 
 public class Item {
@@ -13,8 +15,8 @@ public class Item {
     private Configuration configuration;
 
 
-    public Item(int id, String title, int price, String image_url, Configuration configuration, String currency) {
-        this.id = id;
+    public Item(String title, int price, String image_url, Configuration configuration, String currency) {
+        this.id = ItemIdGenerator.getNextId();
         this.title = title;
         this.price = price;
         this.currency = currency;
@@ -22,8 +24,8 @@ public class Item {
         this.configuration = configuration;
     }
 
-    public Item(int id, String title, int price, String image_url) {
-        this.id = id;
+    public Item(  String title, int price, String image_url) {
+        this.id = ItemIdGenerator.getNextId();
         this.title = title;
         this.price = price;
         this.image_url = image_url;

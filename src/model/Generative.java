@@ -3,8 +3,8 @@ package model;
 public class Generative extends Item {
     private final double complexity;
 
-    public Generative(int id, String title, int price, String image_URL, Configuration configuration, double complexity, String currency) {
-        super(id, title, price, image_URL, configuration, currency);
+    public Generative(String title, int price, String image_URL, Configuration configuration, double complexity, String currency) {
+        super( title, price, image_URL, configuration, currency);
         this.complexity = complexity;
     }
 

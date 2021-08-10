@@ -35,7 +35,7 @@ public class Main {
             int parentId = Integer.parseInt(itemFields[4]);
             Optional<Group> parent = Storage.getGroupById(parentId);
 
-            Item item = new Item(id, name, basePrice, imageURl);
+            Item item = new Item( name, basePrice, imageURl);
             parent.ifPresent(item::setParent);
 
             Storage.addItem(item);
