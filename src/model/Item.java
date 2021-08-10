@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.Objects;
+
 public class Item {
     private final int id;
     private final String title;
@@ -78,5 +80,18 @@ public class Item {
     public void print() {
         System.out.printf("ITEM(%s) - id: {%d} {%s} {%d}%n",
                 this.getClass().getSimpleName(), id, title, price);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return id == item.id && price == item.price && Objects.equals(title, item.title) && Objects.equals(image_url, item.image_url) && Objects.equals(currency, item.currency) && Objects.equals(parent, item.parent) && Objects.equals(configuration, item.configuration);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, image_url, price, currency, parent, configuration);
     }
 }

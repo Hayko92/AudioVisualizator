@@ -81,4 +81,17 @@ public class Group {
             item.print();
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return id == group.id && Objects.equals(title, group.title) && Objects.equals(parent, group.parent) && Objects.equals(items, group.items) && Objects.equals(groups, group.groups);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, parent, items, groups);
+    }
 }
