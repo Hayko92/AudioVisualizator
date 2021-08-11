@@ -1,7 +1,7 @@
-package db;
+package audioVisualizator.db;
 
-import model.*;
-import util.GroupIdGenerator;
+import audioVisualizator.model.*;
+
 
 import java.util.*;
 import java.util.stream.Collectors;

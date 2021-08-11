@@ -1,7 +1,8 @@
-package model;
+package audioVisualizator.model;
 
 
-import util.ItemIdGenerator;
+
+import audioVisualizator.util.ItemIdGenerator;
 
 import java.util.Objects;
 

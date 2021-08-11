@@ -1,4 +1,4 @@
-package model;
+package audioVisualizator.model;
 
 public class Configuration {
     private final Resolution resolution;

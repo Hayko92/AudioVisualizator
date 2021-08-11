@@ -1,7 +1,7 @@
-package model;
+package audioVisualizator.model;
 
-import db.Storage;
-import util.GroupIdGenerator;
+
+import audioVisualizator.util.GroupIdGenerator;
 
 import java.util.*;
 

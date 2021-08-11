@@ -1,4 +1,4 @@
-package model;
+package audioVisualizator.model;
 
 public class Generative extends Item {
     private final double complexity;

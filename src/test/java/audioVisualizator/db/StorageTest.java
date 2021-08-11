@@ -1,25 +1,23 @@
-package db;
+package audioVisualizator.db;
 
-import model.Configuration;
-import model.Group;
-import model.Item;
-import model.Resolution;
+
+import audioVisualizator.model.Configuration;
+import audioVisualizator.model.Group;
+import audioVisualizator.model.Item;
+import audioVisualizator.model.Resolution;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-
-
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StorageTest {
-@BeforeEach
-public   void clearData() {
-    System.out.println("Before call");
-    Storage.getGroupList().clear();
-    Storage.getItemList().clear();
-}
+    @BeforeEach
+    public void clearData() {
+        System.out.println("Before call");
+        Storage.getGroupList().clear();
+        Storage.getItemList().clear();
+    }
 
     @Test
     public void addGroupTest() {
@@ -48,17 +46,16 @@ public   void clearData() {
 
     @Test
     public void getGroupByIdTest() {
-        List<Group> groups = Storage.getGroupList();
-        List<Item> items = Storage.getItemList();
         Group group = new Group("Test");
         Storage.addGroup(group);
         Optional<Group> received = Storage.findGroupById(group.getId());
         assertTrue(received.isPresent());
         assertEquals(group.getId(), received.get().getId());
     }
+
     @Test
     public void getItemByIdTest() {
-        Item item = new Item("Test",1,"URL",new Configuration(Resolution.FHD),"USD");
+        Item item = new Item("Test", 1, "URL", new Configuration(Resolution.FHD), "USD");
         Storage.addItem(item);
         Optional<Item> received = Storage.findItemById(item.getId());
         assertTrue(received.isPresent());

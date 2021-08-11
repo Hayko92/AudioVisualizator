@@ -1,7 +1,10 @@
-package util;
+package audioVisualizator.util;
 
-import db.Storage;
-import model.*;
+
+
+import audioVisualizator.db.Storage;
+import audioVisualizator.model.*;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;

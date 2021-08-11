@@ -1,4 +1,4 @@
-package exception;
+package audioVisualizator.exceptions;
 
 public class AppRuntimeException extends  RuntimeException{
     public AppRuntimeException(String message) {
