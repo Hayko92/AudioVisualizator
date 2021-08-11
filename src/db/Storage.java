@@ -12,17 +12,17 @@ public final class Storage {
     private static final List<Item> ITEM_LIST = new ArrayList<>();
 
     static {
-        GROUP_LIST.add(new Group( "First"));
-        GROUP_LIST.add(new Group( "Sec"));
-        GROUP_LIST.add(new Group( "Third"));
-        GROUP_LIST.add(new Group( "Fourth"));
-
-        ITEM_LIST.add(new Item( "First", 10, "URL1", new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item( "Sec", 11, "URL2", new Configuration(Resolution.HD), "USD"));
-        ITEM_LIST.add(new Item( "Third", 19, "URL3", new Configuration(Resolution.FourK), "USD"));
-        ITEM_LIST.add(new Item( "Fourth", 15, "URL4", new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item( "Fourth", 15, "URL5", new Configuration(Resolution.FHD), "USD"));
-        ITEM_LIST.add(new Item( "Fourth", 15, "URL6", new Configuration(Resolution.FHD), "USD"));
+//        GROUP_LIST.add(new Group( "First"));
+//        GROUP_LIST.add(new Group( "Sec"));
+//        GROUP_LIST.add(new Group( "Third"));
+//        GROUP_LIST.add(new Group( "Fourth"));
+//
+//        ITEM_LIST.add(new Item( "First", 10, "URL1", new Configuration(Resolution.FHD), "USD"));
+//        ITEM_LIST.add(new Item( "Sec", 11, "URL2", new Configuration(Resolution.HD), "USD"));
+//        ITEM_LIST.add(new Item( "Third", 19, "URL3", new Configuration(Resolution.FourK), "USD"));
+//        ITEM_LIST.add(new Item( "Fourth", 15, "URL4", new Configuration(Resolution.FHD), "USD"));
+//        ITEM_LIST.add(new Item( "Fourth", 15, "URL5", new Configuration(Resolution.FHD), "USD"));
+//        ITEM_LIST.add(new Item( "Fourth", 15, "URL6", new Configuration(Resolution.FHD), "USD"));
     }
 
     private Storage() {

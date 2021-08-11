@@ -5,6 +5,8 @@ import model.Group;
 import model.Item;
 import model.Resolution;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 
 import java.util.Optional;
@@ -12,8 +14,15 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StorageTest {
+@BeforeEach
+public   void clearData() {
+    Storage.getGroupList().clear();
+    Storage.getItemList().clear();
+}
+
     @Test
-    public void addGroupTestBySize() {
+    public void addGroupTest() {
+
         Group group = new Group("Test");
         int oldSize = Storage.getGroupList().size();
         Storage.addGroup(group);
@@ -41,6 +50,13 @@ public class StorageTest {
         Group group = new Group("Test");
         Storage.addGroup(group);
         Optional<Group> received = Storage.findGroupById(1);
+        assertEquals(1, received.get().getId());
+    }
+    @Test
+    public void getItemByIdTest() {
+        Item item = new Item("Test",1,"URL",new Configuration(Resolution.FHD),"USD");
+        Storage.addItem(item);
+        Optional<Item> received = Storage.findItemById(1);
         assertEquals(1, received.get().getId());
     }
 }
