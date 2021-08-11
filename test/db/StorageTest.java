@@ -4,8 +4,7 @@ import model.Configuration;
 import model.Group;
 import model.Item;
 import model.Resolution;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 
@@ -16,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StorageTest {
 @BeforeEach
 public   void clearData() {
+    System.out.println("Before call");
     Storage.getGroupList().clear();
     Storage.getItemList().clear();
 }
@@ -50,6 +50,7 @@ public   void clearData() {
         Group group = new Group("Test");
         Storage.addGroup(group);
         Optional<Group> received = Storage.findGroupById(1);
+        assertTrue(received.isPresent());
         assertEquals(1, received.get().getId());
     }
     @Test
@@ -57,6 +58,7 @@ public   void clearData() {
         Item item = new Item("Test",1,"URL",new Configuration(Resolution.FHD),"USD");
         Storage.addItem(item);
         Optional<Item> received = Storage.findItemById(1);
+        assertTrue(received.isPresent());
         assertEquals(1, received.get().getId());
     }
 }
