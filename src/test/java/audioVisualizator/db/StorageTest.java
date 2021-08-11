@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StorageTest {
     @BeforeEach
     public void clearData() {
-        System.out.println("Before call");
         Storage.getGroupList().clear();
         Storage.getItemList().clear();
     }
