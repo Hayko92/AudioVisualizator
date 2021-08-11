@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,25 +41,27 @@ public   void clearData() {
         Storage.addItem(item);
         int newSize = Storage.getItemList().size();
         assertEquals(1, newSize - oldSize);
-        Optional<Item> received = Storage.findItemById(1);
+        Optional<Item> received = Storage.findItemById(item.getId());
         assertTrue(received.isPresent());
         assertEquals(item, received.get());
     }
 
     @Test
     public void getGroupByIdTest() {
+        List<Group> groups = Storage.getGroupList();
+        List<Item> items = Storage.getItemList();
         Group group = new Group("Test");
         Storage.addGroup(group);
-        Optional<Group> received = Storage.findGroupById(1);
+        Optional<Group> received = Storage.findGroupById(group.getId());
         assertTrue(received.isPresent());
-        assertEquals(1, received.get().getId());
+        assertEquals(group.getId(), received.get().getId());
     }
     @Test
     public void getItemByIdTest() {
         Item item = new Item("Test",1,"URL",new Configuration(Resolution.FHD),"USD");
         Storage.addItem(item);
-        Optional<Item> received = Storage.findItemById(1);
+        Optional<Item> received = Storage.findItemById(item.getId());
         assertTrue(received.isPresent());
-        assertEquals(1, received.get().getId());
+        assertEquals(item.getId(), received.get().getId());
     }
 }
