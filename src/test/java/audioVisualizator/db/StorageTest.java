@@ -5,9 +5,11 @@ import audioVisualizator.model.Configuration;
 import audioVisualizator.model.Group;
 import audioVisualizator.model.Item;
 import audioVisualizator.model.Resolution;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import java.util.Optional;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,9 +28,10 @@ public class StorageTest {
         Storage.addGroup(group);
         int newSize = Storage.getGroupList().size();
         assertEquals(1, newSize - oldSize);
-        Optional<Group> received = Storage.findGroupById(1);
+        Optional<Group> received = Storage.findGroupById(group.getId());
         assertTrue(received.isPresent());
         assertEquals(group, received.get());
+
     }
 
     @Test
